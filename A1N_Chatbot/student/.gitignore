@@ -1,0 +1,31 @@
+dist
+<<<<<<< HEAD
+*.cabal
+*.lock
+.stack-work
+dist-*
+*.cabal
+=======
+dist-*
+cabal-dev
+*.o
+*.hi
+*.hie
+*.chi
+*.chs.h
+*.dyn_o
+*.dyn_hi
+.hpc
+.hsenv
+.cabal-sandbox/
+cabal.sandbox.config
+*.prof
+*.aux
+*.hp
+*.eventlog
+.stack-work/
+cabal.project.local
+cabal.project.local~
+.HTF/
+.ghc.environment.*
+>>>>>>> 89e3794193b09367bd7a2ec83a3be7c9403291bb
