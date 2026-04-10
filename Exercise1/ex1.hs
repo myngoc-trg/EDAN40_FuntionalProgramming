@@ -106,4 +106,66 @@ substitute old new (x:xs)
 
 
 
---2.2.3: Avoiding duplicates 
+--2.2.3: Avoiding duplicates
+--check duplicate in list 
+duplicates :: Eq a => [a] -> Bool
+duplicates [] = False
+duplicates [x] = False
+duplicates (x:xs) 
+-- elem :: 	Eq a => a -> [a] -> Bool
+    | elem x xs = True
+    | otherwise = duplicates xs
+
+--remove duplicates in list
+removeDuplicates :: Eq a => [a] -> [a]
+removeDuplicates [] = []
+removeDuplicates [x] = [x]
+removeDuplicates (x:xs) 
+    | elem x xs = removeDuplicates xs
+    | otherwise = x : removeDuplicates xs
+
+prop_duplicatesRemoved :: [Integer] -> Bool
+prop_duplicatesRemoved xs =
+    all (\x -> elem x xs == elem x (removeDuplicates xs)) x
+
+
+
+--2.2.4: Comprehensions¨
+pyth n = [(a,b,c) | a <- [1..n], b <- [a..n], c <- [b..n], a^2 + b^2 == c^2]
+
+
+
+--2.2.5: Permutations
+isPermutation :: Eq a => [a] -> [a] -> Bool
+isPermutation [] [] = True
+isPermutation _ [] = False
+isPermutation [] _ = False
+isPermutation (x:xs) ys
+    | elem x ys = isPermutation xs (remove1 x ys)
+    | otherwise = False
+
+
+
+--2.2.6: Shortest and Longest (Chakravarty)
+--determine the shortest and the longest string in a list
+shortestAndLongest :: [String] -> (String, String)
+shortestAndLongest [] = ([], [])
+shortestAndLongest xs = (shortest xs, longest xs)
+
+shortest (x:xs)
+    | null xs || shorter x xs = x
+    | otherwise = shortest xs
+
+shorter x xs = (length x) <= (minimum (map length xs))
+
+longest (x:xs)
+    | null xs || longer x xs = x
+    | otherwise = longest xs
+
+longer x xs = (length x) >= (maximum (map lengh xs))
+
+
+
+
+--2.2.7: Mystery
+mystery xs = foldr (++) [] (map (\y -> [y]) xs)
