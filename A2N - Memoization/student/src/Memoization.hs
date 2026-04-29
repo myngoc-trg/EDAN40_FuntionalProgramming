@@ -191,9 +191,18 @@ data Trie node edge = Trie node [(edge, Trie node edge)]
   deriving Show
 
 -- First, looking for a list in a trie...
-trieLookup :: Eq e => Trie a e -> [e] -> a
+--There are two cases:
+--    1. If the list is empty, we return the value of the current node
+--    2. If the list is not empty, we find the subtree to explore using the current character, and do a lookup from there.
+trieLookup :: Eq e => Trie a e --the tries
+  -> [e] --the list of edges to follow
+  -> a --the value of the node we end up at
+trieLookup (Trie value _) [] = value
+trieLookup (Trie _ children) (edge:rest) =
+  trieLookup (fromJust (lookup edge children)) rest
+
 {- TO BE WRITTEN -}
-trieLookup t l = undefined
+--trieLookup t l = undefined
 
 -- Get a subset of a trie, with limited depth
 -- (Provided: Useful for debugging)
@@ -205,16 +214,19 @@ limitTrie n (Trie v edges) =
 -- Map a function over all values in the trie
 -- Edge labels stay the same.
 mapTrie :: (a -> b) -> Trie a e -> Trie b e
+mapTrie f (Trie v cs) =
+  Trie (f v) [(edge, mapTrie f child) | (edge,child) <- cs]
 {- TO BE WRITTEN -}
-mapTrie f (Trie v cs) = undefined
+--mapTrie f (Trie v cs) = undefined
 
 -- To build an infinite trie, we start from the root
 -- The root starts with the empty list...
 -- And from that, we have a number of edges
 -- The domain 'dom' defines how many edges we have per node
 rootTrie :: [a] -> Trie [a] a
+rootTrie domain = Trie [] (edges domain [])
 {- TO BE WRITTEN -}
-rootTrie domain = undefined
+--rootTrie domain = undefined
 
 -- How do we create the edges?
 -- We look at the domain,
@@ -224,8 +236,10 @@ rootTrie domain = undefined
 -- the domain, the current label
 -- and the current node
 edges :: [a] -> [a] -> [(a, Trie [a] a)]
+edges domain currentNode = 
+    [(label, subtree domain label currentNode) | label <- domain]
 {- TO BE WRITTEN -}
-edges domain currentNode = undefined
+--edges domain currentNode = undefined
 
 -- How do we build the subtree?
 -- We use the label we just followed
@@ -233,17 +247,21 @@ edges domain currentNode = undefined
 -- And each child creates more edges!
 -- (using the edges function)
 subtree :: [a] -> a -> [a] -> Trie [a] a
-{- TO BE WRITTEN -}
 subtree domain label parent =
-  undefined
+  let currentNode = parent ++ [label]
+  in Trie currentNode (edges domain currentNode)
+{- TO BE WRITTEN -}
+--subtree domain label parent =undefined
 
 -- Important: the trie is infinite because edges calls subtree, and subtree calls edges.
 
 -- trieCache builds a cache for a function
 -- provided with a domain (for the list elements)
 trieCache :: [e] -> ([e] -> b) -> Trie b e
+trieCache domain function =
+  mapTrie function (rootTrie domain)
 {- TO BE WRITTEN -}
-trieCache domain function = undefined
+--trieCache domain function = undefined
 
 {--
 You can inspect the cache with GHCI!
@@ -289,13 +307,28 @@ s1 = "bananrepubliksinvasionsarmestabsadjutant"
 s2 = "kontrabasfiolfodralmakarmästarlärling"
 
 openLPS :: (String -> String) -> (String -> String)
-openLPS s = undefined -- look at 'lps' for inspiration
+openLPS _ "" = ""
+openLPS _ [x] = [x]
+openLPS f xs =
+  let firstCh = head xs
+      lastCh = last xs
+      middleCh = tail (dropLast xs)
+  in if firstCh == lastCh
+    then [firstCh] ++ f middleCh ++ [lastCh]
+    else
+      let withoutFirst = f (tail xs)
+          withoutLast = f (dropLast xs)
+      in if length withoutFirst > length withoutLast
+        then withoutFirst
+        else withoutLast
+
+--openLPS s = undefined -- look at 'lps' for inspiration
 
 -- Fast!
 fastLPS :: String -> String
-fastLPS s =
-  undefined
-
+--fastLPS s = undefined
+fastLPS =
+  trieLookup (trieCache ['a'..'z'] (openLPS fastLPS))
 -- So, what were the tricks?
 -- The first one is to build an infinite data-structure, to memoize the function
 -- And then your function looks in the cache for the answer!
