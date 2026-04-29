@@ -1,0 +1,35 @@
+# Build outputs
+dist/
+dist-*
+dist-newstyle/
+.stack-work/
+cabal-dev/
+
+# Cabal / Stack local files
+*.cabal
+*.lock
+cabal.project.local
+cabal.project.local~
+.ghc.environment.*
+.cabal-sandbox/
+cabal.sandbox.config
+
+# Haskell compiled files
+*.o
+*.hi
+*.hie
+*.chi
+*.chs.h
+*.dyn_o
+*.dyn_hi
+
+# Profiling / logs / coverage
+*.prof
+*.aux
+*.hp
+*.eventlog
+.hpc/
+.HTF/
+
+# Local editor files
+.vscode/

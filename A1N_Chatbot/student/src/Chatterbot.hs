@@ -1,3 +1,6 @@
+
+-- NANCY TRUONG
+
 module Chatterbot where
 import Utilities
 import System.Random
@@ -137,7 +140,7 @@ ruleCompile (pat, templates) =
 mkPattern :: Eq a => a -> [a] -> Pattern a
 mkPattern wc = Pattern . map toPatternElem
   where 
-    toPatternElem x 
+    toPatternElem x git
       | x == wc = Wildcard
       | otherwise = Item x 
 --mkPattern = undefined
