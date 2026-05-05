@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>README.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> or <div class="page"></div> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="assignment-3-monadic-parsing">Assignment 3: Monadic Parsing</h1>
+<p>In this assignment you will create a parser and an interpreter for a
+small imperative language. The main goal is to get acquainted with a
+monadic way of solving a classical problem in computer science.</p>
+<h1 id="introduction">Introduction</h1>
+<p>The following program is written in the programming language to be
+parsed and interpreted in this assignment.</p>
+<pre><code>read k;
+read n;
+m := 1;
+while n-m do
+    begin
+    if m - m/k*k then
+        skip;
+    else
+        -- note an exponentiation below
+        write m^2;
+    m := m + 1; -- an inline comment
+    end
+write - yet another comment, this time inside a statement!
+    m^2^3;
+</code></pre>
+<p>The language has just one data type, integer, and variables are not
+declared. In the <code>while</code> and <code>if</code> statements a positive expression value
+is interpreted as true while 0 and negative values mean false.</p>
+<p>The program above reads two integers, <code>k</code> and <code>n</code>, and writes squares of
+all integers between <code>1</code> and <code>n</code> that are multiples of <code>k</code>.
+Finally it should write the eighth power of <code>n</code>.</p>
+<p>The grammar for the language is given by</p>
+<pre><code>program ::= statements
+statement ::= variable ':=' expr ';'
+        | 'skip' ';'
+        | 'begin' statements 'end'
+        | 'if' expr 'then' statement 'else' statement
+        | 'while' expr 'do' statement
+        | 'read' variable ';'
+        | 'write' expr ';'
+statements ::= {statement}
+variable ::= letter {letter}
+</code></pre>
+<p>An explanation of this grammar (besides the comment case) and a parser
+for an expression, <code>expr</code> (besides the power taking operation), can be
+found in the document <a href="https://fileadmin.cs.lth.se/cs/Education/EDAN40/assignment3/parser.pdf">Parsing with
+Haskell</a>, by Lennart Andersson.
+The intended semantics for the language should be obvious from the keywords
+for anybody familiar with any imperative language.</p>
+<h1 id="getting-started">Getting Started</h1>
+<p>Run <code>stack test</code>. You should see some test fail. Your task is to write code so that all the tests pass.</p>
+<h1 id="program-structure">Program structure</h1>
+<p>You are given the stub of a solution:</p>
+<h2 id="srccoreparserhs"><code>src/CoreParser.hs</code>:</h2>
+<p>defines the <code>Parser</code> type and implements the three elementary
+parsers, <code>char</code>, <code>return</code> and <code>fail</code>, and the basic parser operators
+<code>#</code>, <code>!</code>, <code>?</code>, <code>#&gt;</code>, and <code>&gt;-&gt;</code>, described in <a href="https://fileadmin.cs.lth.se/cs/Education/EDAN40/assignment3/parser.pdf">Parsing with Haskell</a>.</p>
+<p>The class <code>Parse</code> with signatures for <code>parse</code>, <code>toString</code>, and
+<code>fromString</code> with an implementation for the last one is introduced.</p>
+<p>The representation of the Parser type is visible outside the module,
+but this visibilty should not be exploited.</p>
+<h2 id="srcparserhs"><code>src/Parser.hs</code>:</h2>
+<p>contains a number of derived parsers and parser operators.</p>
+<h2 id="srcexprhs"><code>src/Expr.hs</code>:</h2>
+<p>contains a data type for representing an arithmetic expression, an
+expression parser, an expression evaluator, and a function for
+converting the representation to a string.</p>
+<h2 id="srcdictionaryhs"><code>src/Dictionary.hs</code>:</h2>
+<p>contains a data type for representing a dictionary.</p>
+<h2 id="srcstatemenths"><code>src/Statement.hs</code>:</h2>
+<p>contains a data type for representing a statement, a statement
+parser, a function to interpret a list of statements, and a function
+for converting the representation to a string.</p>
+<h2 id="srcprogramhs"><code>src/Program.hs</code>:</h2>
+<p>contains a data type for representing a program, a program parser, a
+program interpreter, and a function for converting the
+representation to a string.</p>
+<h2 id="test"><code>test/</code></h2>
+<p>The <code>test</code> directory contains several files which check that your solution works.
+The main file is <code>Spec.hs</code> which calls the other tests.</p>
+<p>In a test using the program in the introduction with the following
+definitions</p>
+<pre><code>src = &quot;read k; read n; m:=1; ... &quot;
+p = Program.fromString src
+</code></pre>
+<p>the expression <code>Program.exec p [3,16]</code> should obviously return
+<code>[9,36,81,144,225]</code>.</p>
+<h1 id="assignment-and-hints">Assignment and hints</h1>
+<ol>
+<li>
+<p>In <code>Parser.hs</code> implement the following functions. All the
+implementations should use other parsers and parser operators. No
+implementation may rely on the fact that the parsers return values
+of type <code>Maybe (a, String)</code>. This means e.g. that the words <code>Just</code>
+and <code>Nothing</code> may not appear in your code.</p>
+<p><code>letter :: Parser Char.</code>:
+<code>letter</code> is a parser for a letter as defined by the Prelude
+function <code>isAlpha</code>.</p>
+<p><code>spaces :: Parser String.</code>:
+<code>spaces</code> accepts any number of whitespace characters as defined
+by the Prelude function <code>isSpace</code>. Consider treating comments as
+whitespace.</p>
+<p><code>chars :: Int -&gt; Parser String.</code>:
+The parser <code>chars n</code> accepts <code>n</code> characters.</p>
+<p><code>require :: String -&gt; Parser String.</code>:
+The parser <code>require w</code> accepts the same string input as
+<code>accept w</code> but reports the missing string using <code>err</code> in case of
+failure.</p>
+<p><code>-# :: Parser a -&gt; Parser b -&gt; Parser b.</code>:
+The parser <code>m -# n</code> accepts the same input as <code>m # n</code>, but
+returns just the result from the <code>n</code> parser. The function should
+be declared as a left associative infix operator with
+precedence 7. Example:</p>
+<pre><code>    (accept &quot;read&quot; -# word) &quot;read count;&quot; -&gt; Just (&quot;count&quot;, &quot;;&quot;)
+</code></pre>
+<p><code>#- :: Parser a -&gt; Parser b -&gt; Parser a.</code>
+:   The parser <code>m #- n</code> accepts the same input as <code>m # n</code>, but
+returns the result from the <code>m</code> parser.</p>
+</li>
+<li>
+<p>Implement the function <code>value</code> in module <code>Expr</code>. The expression
+<code>value e dictionary</code> should return the value of <code>e</code> if all the
+variables occur in <code>dictionary</code> and there is no division by zero.
+Otherwise an error should be reported using <code>error</code>.</p>
+</li>
+<li>
+<p>Implement the type and the functions in the <code>Statement</code> module. Some
+hints:
+a.  The data type <code>T</code> should have seven constructors, one for each
+kind of statement.</p>
+<p>b.  Define a parsing function for each kind of statement. If the
+parser has accepted the first reserved word in a statement, you
+should use <code>require</code> rather than <code>accept</code> to parse other
+reserved words or symbols in order to get better error messages
+in case of failure. An example:</p>
+<pre><code>       assignment = word #- accept &quot;:=&quot; # Expr.parse
+                         #- require &quot;;&quot; &gt;-&gt; buildAss
+       buildAss (v, e) = Assignment v e
+</code></pre>
+<p>c.  Use these functions to define <code>parse</code>.</p>
+<p>d.  The function
+<code>exec :: [T] -&gt; Dictionary.T String Integer -&gt; [Integer] -&gt; [Integer]</code>
+takes a list of statements to be executed, a dictionary
+containing variable/value pairs, and a list of integers
+containing numbers that may be read by <code>read</code> statements and the
+returned list contains the numbers produced by <code>write</code>
+statements.<br>
+The function <code>exec</code> is defined using pattern matching on the
+first argument. If it is empty an empty integer list is
+returned. The other patterns discriminate over the first
+statement in the list. As an example the execution of a
+conditional statement may be implemented by</p>
+<pre><code>```
+exec (If cond thenStmts elseStmts: stmts) dict input =
+    if (Expr.value cond dict)&gt;0
+    then exec (thenStmts: stmts) dict input
+    else exec (elseStmts: stmts) dict input
+```
+</code></pre>
+<p>e.  For each kind of statement there will be a recursive invocation
+of <code>exec</code>. A write statement will add a value to the returned
+list, while an assignment will make a recursive call with a new
+dictionary.</p>
+</li>
+<li>
+<p>Introduce possibility of writing comments in the code: all text
+beginning with <code>&quot;--&quot;</code> should be ignored until (and including) the
+newline character. You may need to modify more (or something else)
+than the <code>Statement</code> module.<br>
+<strong>Hint:</strong> It seems that the comments can be relatively simply
+handled as white space.</p>
+</li>
+<li>
+<p>In the <code>Program</code> module you should represent the program as a
+<code>Statement</code> list. Use the parse function from the <code>Statement</code> module
+to define the parse function in this module. Use the <code>exec</code> function
+in the <code>Statement</code> module to execute a program.</p>
+</li>
+<li>
+<p>Implement <code>toString :: T -&gt; String</code> in <code>Statement</code> and <code>Program</code>. A
+newline character should be inserted after each statement and some
+keywords. Use indentation (as in the example code above). No
+spurious empty lines should appear in the output.</p>
+<p>Please note that the output of your <code>toString</code> should be a legal
+program, i.e. should be parsable and executable again. The comments
+may be omitted, of course.</p>
+</li>
+<li>
+<p>Extend the datatype <code>Expr</code> defined in <code>Expr.hs</code> with exponentiation,
+so that your expressions would allow e.g. a^2 or 2^a as legal
+strings in the program code (and compute their values when
+necessary). You will need to introduce modifications in a number of
+files.
+<strong>Hint:</strong> There is an informative discussion of this problem on <a href="https://stackoverflow.com/questions/17162919/unambiguous-grammar-for-exponentiation-operation">Stack Overflow</a>, but only the second answer (by ToxicAbe) seems to be correct!</p>
+<p>Make sure that your exponentiation</p>
+<ol>
+<li>binds harder than multiplication or division, and</li>
+<li>that consecutive exponentiation binds to the right, so that
+<code>a^b^c</code> is interpreted as <code>a^(b^c)</code>. E.g. 2^3^4 is equal
+2^(3^4) =2,418×10²⁴  and not (2^3)^4 =4 096 .</li>
+</ol>
+</li>
+</ol>
+<h1 id="what-to-submit">What to submit</h1>
+<p>Submit all the files in your <code>src</code> directory to the Moodle, you can submit several files at once.</p>
+<h1 id="provided-documents">Provided documents</h1>
+<p>Lennart Andersson's <a href="https://fileadmin.cs.lth.se/cs/Education/EDAN40/assignment3/parser.pdf">Parsing in Haskell</a> describes building parsers using <code>Maybe</code>.</p>
+
+</body>
+</html>
