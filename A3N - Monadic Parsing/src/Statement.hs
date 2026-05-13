@@ -119,13 +119,21 @@ indent n = replicate n ' '
 
 showWithIndent :: Int -> Statement -> String
 showWithIndent n (Assignment var expr) =
-    indent n ++ var ++ " :=" ++ Expr.toString expr ++ ";\n"
+    --indent n ++ var ++ " :=" ++ Expr.toString expr ++ ";\n"
+    indent n ++ var ++ " := " ++ Expr.toString expr ++ ";"   
+
 showWithIndent n Skip =
-    indent n ++ "skip;\n"
+    --indent n ++ "skip;\n"
+    indent n ++ "skip;"
+
 showWithIndent n (Read var) =
-    indent n ++ "read " ++ var ++ ";\n"
+--    indent n ++ "read " ++ var ++ ";\n"
+    indent n ++ "read " ++ var ++ ";"
+
 showWithIndent n (Write expr) =
-    indent n ++ "write " ++ Expr.toString expr ++ ";\n"
+    --indent n ++ "write " ++ Expr.toString expr ++ ";\n"
+    indent n ++ "write " ++ Expr.toString expr ++ ";"
+
 showWithIndent n (Begin stmts) =
     indent n ++ "begin\n" ++
     concatMap (showWithIndent (n + 4)) stmts ++
@@ -136,9 +144,10 @@ showWithIndent n (If cond thenStmt elseStmt) =
     indent n ++ "else\n" ++
     showWithIndent (n + 4) elseStmt
 showWithIndent n (While cond body) =
-    indent n ++ "while " ++ Expr.toString cond ++ " do\n" ++
-    showWithIndent (n + 4) body 
-
+    --indent n ++ "while " ++ Expr.toString cond ++ " do\n" ++
+    --showWithIndent (n + 4) body 
+    indent n ++ "while " ++ Expr.toString cond ++ " do " ++ Expr.toString body
+    --showWithIndent (n + 4) 
 
 instance Parse Statement where
   --parse = error "Statement.parse not implemented"
